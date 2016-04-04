@@ -1,0 +1,26 @@
+<h1>New User</h1>
+<%= form_for :user, url: {action: "create"} do |f| %>
+    <p>
+      <%= f.label :Login %><br>
+      <%= f.text_field :login %>
+    </p>
+
+    <p>
+      <%= f.label :"Avatar link" %><br>
+      <%= f.text_field :avatar_link %>
+    </p>
+
+    <p>
+      <%= f.label :Password %><br>
+      <%= f.password_field :password %>
+    </p>
+
+    <p>
+      <%= f.label :"Check password" %><br>
+      <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
