@@ -4,13 +4,18 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
   resources :articles do
     resources :comments
-
   end
 
   root 'welcome#index'
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
 
 
   # Example of regular route:

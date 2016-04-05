@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404121942) do
+ActiveRecord::Schema.define(version: 20160404145418) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 20160404121942) do
     t.datetime "updated_at",         null: false
     t.string   "encrypted_password"
     t.string   "salt"
+    t.string   "remember_token"
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
