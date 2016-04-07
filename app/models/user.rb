@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
 
   def has_password?(submitted_password)
+    decrpass = encrypt(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
 
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def User.encrypt(token)
+  def User.encrypt_token(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 
@@ -41,11 +42,13 @@ class User < ActiveRecord::Base
 
     def encrypt_password
       self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password)
+      #encrpass = encrypt(password)if new_record?
+      self.encrypted_password = encrypt(password) if new_record?
     end
 
     def encrypt(string)
       secure_hash("#{salt}--#{string}")
+      #secure_hash(string)
     end
 
     def make_salt
@@ -57,6 +60,6 @@ class User < ActiveRecord::Base
     end
 
     def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+      self.remember_token = User.encrypt_token(User.new_remember_token)
     end
 end

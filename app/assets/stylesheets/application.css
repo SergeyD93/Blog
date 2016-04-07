@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+body{
+    background: #CCCCFF;
+}
+.top{
+    background:#0099FF;
+}
+.article_content {
+    margin-left: 30px;
+}
+.article_title{
+    color: #000;
+    text-decoration: none;
+    font-size: large;
+}
+.article_header{
+    vertical-align: bottom;
+}
