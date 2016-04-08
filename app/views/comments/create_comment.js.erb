@@ -1,0 +1,6 @@
+$(document.getElementById('new_comment')).remove();
+$(document.getElementById('<%=@comment.id%>')).append('<%= escape_javascript render "form" %>');
+
+
+
+

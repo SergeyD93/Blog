@@ -1,15 +1,18 @@
-<p>
-  <strong>Commenter:</strong>
+<div id=<%=comment.id%>>
+  <p>
+    <strong>Commenter:</strong>
+  <%= User.find_by(id: comment.user_id).login %>
+  </p>
 
-</p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+  <%= link_to 'Comment', [:create_comment, comment.article, comment], :remote => true %>
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
 
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-</p>
+    <%= link_to 'Destroy Comment', [comment.article, comment],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </p>
+</div>

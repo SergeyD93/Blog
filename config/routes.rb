@@ -9,13 +9,20 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :articles do
-    resources :comments
+    resources :comments do
+      member do
+        get 'create_comment'
+      end
+    end
   end
 
   root 'welcome#index'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/articles_comment',  to: 'articles#comment', via: 'get'
+  match '/create_comment_to_comment',  to: 'comment#create_comment', via: 'get'
+
 
 
   # Example of regular route:

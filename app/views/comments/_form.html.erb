@@ -1,9 +1,12 @@
-<%= form_for([@article, @article.comments.build]) do |f| %>
-    <p>
-      <%= f.label :body %><br>
-      <%= f.text_area :body %>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
-<% end %>
+<div id="new_comment">
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+      <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+        <%= f.hidden_field :parent_comment_id, :value => params[:controller] == 'comments' ? params[:id] : nil %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
+</div>

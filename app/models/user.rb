@@ -2,6 +2,8 @@ require 'digest'
 
 class User < ActiveRecord::Base
 
+  has_many :comments, dependent: :destroy
+
   attr_accessor :password
 
   attr_accessible :login, :avatar_link, :password, :password_confirmation

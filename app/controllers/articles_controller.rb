@@ -6,6 +6,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+
+    respond_to do |format|
+       format.html
+       format.js
+    end
   end
 
   def new
@@ -41,13 +46,24 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
 
-    redirect_to articles_path
+    respond_to do |format|
+      if @article.destroy
+        format.js
+        format.html { redirect_to (articles_path) }
+      end
+    end
+  end
 
+  def comment
+    @article = Article.find(params[:id])
+    respond_to do |format|
+        format.js
+        format.html
+    end
   end
 
   private
     def article_params
       params.require(:article).permit(:title, :text)
     end
-
 end
