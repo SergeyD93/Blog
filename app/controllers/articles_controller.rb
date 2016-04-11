@@ -6,11 +6,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-
-    respond_to do |format|
-       format.html
-       format.js
-    end
   end
 
   def new
@@ -49,7 +44,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.destroy
         format.js
-        format.html { redirect_to (articles_path) }
+        format.html
       end
     end
   end
@@ -59,6 +54,14 @@ class ArticlesController < ApplicationController
     respond_to do |format|
         format.js
         format.html
+    end
+  end
+
+  def show_comments
+    @article = Article.find(params[:article_id])
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 

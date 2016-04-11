@@ -1,18 +1,20 @@
-<div id=<%=comment.id%>>
-  <p>
-    <strong>Commenter:</strong>
-  <%= User.find_by(id: comment.user_id).login %>
-  </p>
-
-  <p>
-    <strong>Comment:</strong>
+<div id=<%=comment.id%>_parent-<%=comment.parent_comment_id%> class="comment">
+  <div class="comment_header">
+    <Img src= <%= User.find_by_id(comment.user_id).avatar_link %> Width="20" Height="20">
+    <span><%= User.find_by_id(comment.user_id).login %></span>
+    <span class="comments_links">
+      <% if current_user %>
+        <%= link_to 'Comment', [:create_comment, comment.article, comment], :remote => true %>
+      <%end%>
+      <% if current_user && comment.user_id == current_user.id %>
+        <%= link_to 'Destroy Comment', [comment.article, comment],
+                    method: :delete, :remote =>true,
+                    data: { confirm: 'Are you sure?' } %>
+      <%end%>
+    </span>
+  </div>
+  <div id="comment_content">
     <%= comment.body %>
-  </p>
-  <%= link_to 'Comment', [:create_comment, comment.article, comment], :remote => true %>
-
-
-    <%= link_to 'Destroy Comment', [comment.article, comment],
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-  </p>
+  </div>
+  <div clas="answer_place"></div>
 </div>

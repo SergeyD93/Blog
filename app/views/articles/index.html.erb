@@ -3,36 +3,28 @@
   <%= link_to 'New article', new_article_path %>
 <% end %>
 
-  <!--<tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr> -->
-
   <% @articles.each do |article| %>
       <div id=<%= article.id %>>
 
-        <table class="article_header">
-          <tr>
-            <td><Img src= <%= User.find_by_id(article.user_id).avatar_link %> Width="20" Height="20"></td>
-            <td><%= User.find_by_id(article.user_id).login %></td>
-            <th><%= link_to article.title, article_path(article) , class: "article_title" %> </th>
-            <th><%= link_to 'EXPERIMENT_LINK', article_path(article), :remote => true %> </th>
-            <td>
-              <% if current_user && article.user_id == current_user.id %>
-                  <%= link_to 'Edit', edit_article_path(article) %>|
+        <div class="article_header">
 
+            <Img src= <%= User.find_by_id(article.user_id).avatar_link %> Width="20" Height="20">
+            <%= User.find_by_id(article.user_id).login %></td>
+            <%= link_to article.title, article_path(article) , class: "article_title" %>
+
+              <% if current_user && article.user_id == current_user.id %>
+                  <%= link_to 'Edit', edit_article_path(article) %>
 
                   <%= link_to 'Destroy', article_path(article),
                               method: :delete,
                               id: article.id,
                               data: { confirm: 'Are you sure?',
                                       :remote => true}
-                      #:onclick => "$(this).remove();"
                   %>
               <% end %>
-          </td>
-          </tr>
-          </table>
+
+
+          </div>
 
             <p class="article_content"><%= article.text %></p>
 

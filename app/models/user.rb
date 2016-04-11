@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
 
   def has_password?(submitted_password)
-    decrpass = encrypt(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
 
@@ -44,7 +43,7 @@ class User < ActiveRecord::Base
 
     def encrypt_password
       self.salt = make_salt if new_record?
-      #encrpass = encrypt(password)if new_record?
+
       self.encrypted_password = encrypt(password) if new_record?
     end
 

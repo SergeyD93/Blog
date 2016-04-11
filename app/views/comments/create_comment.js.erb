@@ -1,5 +1,7 @@
 $(document.getElementById('new_comment')).remove();
-$(document.getElementById('<%=@comment.id%>')).append('<%= escape_javascript render "form" %>');
+$(document.getElementById('<%=@comment.id%>_parent-<%=@comment.parent_comment_id%>').getElementsByTagName('div')[2]).append('<%= escape_javascript render "form" %>');
+
+
 
 
 
