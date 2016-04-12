@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-
+  before_action :funk, only: [:comment, :destroy]
   def index
     @articles = Article.all
   end
@@ -38,23 +38,11 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
-
-    respond_to do |format|
-      if @article.destroy
-        format.js
-        format.html
-      end
-    end
   end
 
   def comment
-    @article = Article.find(params[:id])
-    respond_to do |format|
-        format.js
-        format.html
-    end
+
   end
 
   def show_comments
@@ -68,5 +56,13 @@ class ArticlesController < ApplicationController
   private
     def article_params
       params.require(:article).permit(:title, :text)
+    end
+
+    def funk
+      @article = Article.find(params[:id])
+      respond_to do |format|
+        format.js
+        format.html
+      end
     end
 end
