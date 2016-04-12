@@ -1,6 +1,6 @@
 <div id=<%=comment.id%>_parent-<%=comment.parent_comment_id%> class="comment">
   <div class="comment_header">
-    <Img src= <%= User.find_by_id(comment.user_id).avatar_link %> Width="20" Height="20">
+    <%= image_tag (User.find_by_id(comment.user_id).avatar_link), width: 20, height: 20 %>
     <span><%= User.find_by_id(comment.user_id).login %></span>
     <span class="comments_links">
       <% if current_user %>

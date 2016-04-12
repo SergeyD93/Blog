@@ -5,21 +5,8 @@
 <% @articles.each do |article| %>
     <div id=<%= article.id %>>
       <div class="article_header">
-        <Img src= <%= User.find_by_id(article.user_id).avatar_link %> Width="20" Height="20">
-        <%= User.find_by_id(article.user_id).login %></td>
-        <%= link_to article.title, article_path(article) , class: "article_title" %>
-
-        <% if current_user && article.user_id == current_user.id %>
-            <%= link_to 'Edit', edit_article_path(article) %>
-
-            <%= link_to 'Destroy', article_path(article),
-                        method: :delete,
-                        id: article.id,
-                        data: { confirm: 'Are you sure?',
-                                :remote => true}%>
-        <% end %>
+        <% render_article(article) %>
       </div>
-
       <p class="article_content"><%= article.text %></p>
     </div>
 <% end %>
