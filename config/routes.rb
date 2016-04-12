@@ -17,12 +17,12 @@ Rails.application.routes.draw do
   end
 
   root 'articles#index'
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/articles_comment',  to: 'articles#comment', via: 'get'
-  match '/articles_show_comments',  to: 'articles#show_comments', via: 'get'
-  match '/create_comment_to_comment',  to: 'comment#create_comment', via: 'get'
+  get 'signup', to: 'users#new'
+  get '/signin',  to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy'
+  get '/articles_comment',  to: 'articles#comment'
+  get '/articles_show_comments',  to: 'articles#show_comments'
+  get '/create_comment_to_comment',  to: 'comment#create_comment'
 
 
 

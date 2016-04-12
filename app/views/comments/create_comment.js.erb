@@ -1,6 +1,13 @@
 $(document.getElementById('new_comment')).remove();
-$(document.getElementById('<%=@comment.id%>_parent-<%=@comment.parent_comment_id%>').getElementsByTagName('div')[2]).append('<%= escape_javascript render "form" %>');
+show_comment_form();
 
+function show_comment_form()
+{
+  var comment_id ='<%=@comment.id%>_parent-<%=@comment.parent_comment_id%>';
+  var comment = document.getElementById(comment_id);
+  var field_place = comment.getElementsByTagName('div')[2];
+  $(field_place).append('<%= j render "form" %>');
+}
 
 
 

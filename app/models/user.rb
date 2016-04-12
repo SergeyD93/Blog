@@ -16,8 +16,7 @@ class User < ActiveRecord::Base
             :confirmation => true,
             :length => { :within => 6..40 }
 
-  before_save :encrypt_password
-  #before_save { self.login }
+  before_save :encrypt_password, :default_values
   before_create :create_remember_token
 
 
@@ -40,10 +39,17 @@ class User < ActiveRecord::Base
   end
 
   private
+    def default_values
+      if new_record?
+        if self.avatar_link == ''
+          avatar_link_adr = 'http://claimmyrun.com/static/img/default-avatar-160.png'
+          self.avatar_link = avatar_link_adr
+        end
+      end
+    end
 
     def encrypt_password
       self.salt = make_salt if new_record?
-
       self.encrypted_password = encrypt(password) if new_record?
     end
 

@@ -9,9 +9,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if params[:avatar_link].nil?
-      @user.avatar_link = 'http://claimmyrun.com/static/img/default-avatar-160.png'
-    end
     if @user.save
       sign_in @user
       redirect_to @user
@@ -27,6 +24,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:login, :avatar_link, :password, :password_confirmation)
+    params.require(:user).permit(:login, :avatar_link,
+                                 :password, :password_confirmation)
   end
 end
