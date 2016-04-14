@@ -1,7 +1,7 @@
 <div id=<%=comment.id%>_parent-<%=comment.parent_comment_id%> class="comment">
   <div class="comment_header">
-    <%= image_tag (User.find_by_id(comment.user_id).avatar_link), width: 20, height: 20 %>
-    <span><%= User.find_by_id(comment.user_id).login %></span>
+    <%= image_tag (user_by_id(comment.user_id).avatar_link), width: 20, height: 20 %>
+    <span><%= user_by_id(comment.user_id).login %></span>
     <span class="comments_links">
       <% if current_user %>
         <%= link_to 'Comment', [:create_comment, comment.article, comment], :remote => true %>
